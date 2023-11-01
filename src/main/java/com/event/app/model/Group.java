@@ -1,19 +1,20 @@
 package com.event.app.model;
 
+import lombok.Builder;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.util.Set;
 
 @Document
 @Data
+@Builder
 public class Group {
-    @Id
+
+    @MongoId
     private final String id;
     private final String name;
     private final Set<Customer> customers;
-
-
 
 }
