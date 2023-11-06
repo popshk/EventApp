@@ -5,7 +5,7 @@ import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
-import java.util.Set;
+import java.util.List;
 
 @Document
 @Data
@@ -15,6 +15,5 @@ public class Group {
     @MongoId
     private final String id;
     private final String name;
-    private final Set<Customer> customers;
-
+    private final List<Customer> customers;
 }

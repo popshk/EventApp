@@ -5,7 +5,7 @@ import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
-import java.util.Set;
+import java.util.List;
 
 @Document
 @Data
@@ -14,10 +14,11 @@ public class Customer {
 
     @MongoId
     private final String id;
+
     private final String nickName;
     private final String firstName;
     private final String lastName;
-    private final Set<Event> eventCreated;
-    private final Set<Event> eventJoined;
-    private final Set<Customer> friendList;
+    private final List<Event> eventCreated;
+    private final List<Event> eventJoined;
+    private final List<Customer> friendList;
 }
