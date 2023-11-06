@@ -10,8 +10,12 @@ import java.util.Set;
 @Component
 public class DataCleaner {
 
+    private final MongoTemplate mongoTemplate;
+
     @Autowired
-    private MongoTemplate mongoTemplate;
+    public DataCleaner(MongoTemplate mongoTemplate) {
+        this.mongoTemplate = mongoTemplate;
+    }
 
     @PreDestroy
     public void cleanDatabase() {
@@ -26,5 +30,4 @@ public class DataCleaner {
         }
         System.out.println("Data base cleaned.");
     }
-
 }

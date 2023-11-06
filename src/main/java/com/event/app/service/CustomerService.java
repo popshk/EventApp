@@ -6,8 +6,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CustomerService {
+
+    private final CustomerRepo repository;
+
     @Autowired
-    private CustomerRepo repository;
-
-
+    public CustomerService(CustomerRepo repository) {
+        this.repository = repository;
+    }
 }
