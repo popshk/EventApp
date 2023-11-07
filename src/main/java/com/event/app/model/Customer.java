@@ -21,4 +21,5 @@ public class Customer {
     private final List<Event> eventCreated;
     private final List<Event> eventJoined;
     private final List<Customer> friendList;
+
 }
