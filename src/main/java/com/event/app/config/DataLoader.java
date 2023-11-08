@@ -1,4 +1,5 @@
 package com.event.app.config;
+
 import com.event.app.model.Customer;
 import com.event.app.model.Event;
 import com.event.app.repo.CustomerRepo;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-
 public class DataLoader {
 
     private final CustomerRepo customerRepository;
@@ -24,8 +24,8 @@ public class DataLoader {
 
     @PostConstruct
     private void init() {
-        customerRepository.insert(Customer.builder().nickName("Paradox").build());
-        customerRepository.insert(Customer.builder().nickName("Grumpy").build());
+        customerRepository.insert(Customer.builder().username("Paradox").build());
+        customerRepository.insert(Customer.builder().username("Grumpy").build());
         Customer customer = customerRepository.findAll().get(0);
         List<Customer> all = customerRepository.findAll();
         eventRepository.insert(Event.builder().name("test").creator(customer).members(all).build());
