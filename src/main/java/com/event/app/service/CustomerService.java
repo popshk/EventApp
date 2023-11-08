@@ -32,7 +32,7 @@ public class CustomerService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Customer customer = customerRepo.findByNickName(username);
+        Customer customer = customerRepo.findByUsername(username);
         System.out.println("Loading user by username: " + username);
         if (customer == null) {
             throw new UsernameNotFoundException("User not found");

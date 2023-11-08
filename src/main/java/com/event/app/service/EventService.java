@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
 public class EventService {
 
@@ -31,6 +30,4 @@ public class EventService {
         event.setCreator(event.getCreator());
         eventRepo.save(event);
     }
-
-
 }
