@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 @Service
@@ -26,8 +27,7 @@ public class UserService implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    private Supplier<UsernameNotFoundException> usernameNotFoundExceptionSupplier(String id)
-    {
+    private Supplier<UsernameNotFoundException> usernameNotFoundExceptionSupplier(String id) {
         return () -> new UsernameNotFoundException("User: " + id + " not found");
     }
 
@@ -69,5 +69,9 @@ public class UserService implements UserDetailsService {
         User user = userRepo.findById(userId).orElseThrow(usernameNotFoundExceptionSupplier(userId));
         user.getFriendList().removeIf(friend -> friend.getId().equals(friendId));
         userRepo.save(user);
+    }
+
+    public Optional<User> getUserByEmail(String email) {
+        return userRepo.findUserByEmail(email);
     }
 }

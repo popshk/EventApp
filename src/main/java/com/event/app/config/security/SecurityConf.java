@@ -31,7 +31,7 @@ public class SecurityConf {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests()
-                    .requestMatchers("/").permitAll()
+                    .requestMatchers("/","/registration").permitAll()
                     .anyRequest()
                     .authenticated()
                     .and()

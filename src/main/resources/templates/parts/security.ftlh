@@ -1,9 +1,9 @@
 <#assign known = Session.SPRING_SECURITY_CONTEXT??>
 <#if known>
     <#assign
-    customer = Session.SPRING_SECURITY_CONTEXT.authentication.principal
-    name =  customer.getUsername()
-    isAdmin = customer.isAdmin()
+    user = Session.SPRING_SECURITY_CONTEXT.authentication.principal
+    name =  user.getUsername()
+    isAdmin = user.isAdmin()
     >
 <#else>
     <#assign

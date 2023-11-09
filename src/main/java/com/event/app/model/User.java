@@ -37,6 +37,10 @@ public class User implements UserDetails {
     @DBRef
     private List<User> friendList;
 
+    public boolean isAdmin() {
+        return this.roles.contains(Role.ADMIN);
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
