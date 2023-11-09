@@ -23,10 +23,10 @@ public class Event {
     private String eventLocation;
 
     @DBRef
-    private Customer creator;
+    private User creator;
 
     @DBRef
-    private List<Customer> members;
+    private List<User> members;
 
     @Override
     public String toString() {

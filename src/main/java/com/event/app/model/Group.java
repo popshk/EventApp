@@ -15,5 +15,5 @@ public class Group {
     @MongoId
     private final String id;
     private final String name;
-    private final List<Customer> customers;
+    private final List<User> customers;
 }

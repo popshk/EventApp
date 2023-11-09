@@ -1,9 +1,10 @@
 package com.event.app.config;
 
-import com.event.app.model.Customer;
 import com.event.app.model.Event;
-import com.event.app.repo.CustomerRepo;
+import com.event.app.model.User;
 import com.event.app.repo.EventRepo;
+import com.event.app.repo.UserRepo;
+import com.event.app.service.UserService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,21 +14,24 @@ import java.util.List;
 @Service
 public class DataLoader {
 
-    private final CustomerRepo customerRepository;
+    private final UserRepo userRepository;
     private final EventRepo eventRepository;
+    private final UserService userService;
 
     @Autowired
-    public DataLoader(CustomerRepo customerRepository, EventRepo eventRepository) {
-        this.customerRepository = customerRepository;
+    public DataLoader(UserRepo userRepository, EventRepo eventRepository, UserService userService) {
+        this.userRepository = userRepository;
         this.eventRepository = eventRepository;
+        this.userService = userService;
     }
 
     @PostConstruct
     private void init() {
-        customerRepository.insert(Customer.builder().username("Paradox").build());
-        customerRepository.insert(Customer.builder().username("Grumpy").build());
-        Customer customer = customerRepository.findAll().get(0);
-        List<Customer> all = customerRepository.findAll();
+        userRepository.insert(User.builder().username("Paradox").build());
+        userRepository.insert(User.builder().username("Grumpy").build());
+        userService.loadUserByUsername("Grumpy");
+        User customer = userRepository.findAll().get(0);
+        List<User> all = userRepository.findAll();
         eventRepository.insert(Event.builder().name("test").creator(customer).members(all).build());
     }
 }

@@ -1,7 +1,7 @@
 package com.event.app.service;
 
-import com.event.app.model.Customer;
 import com.event.app.model.Event;
+import com.event.app.model.User;
 import com.event.app.repo.EventRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class EventService {
         return eventRepo.findAll();
     }
 
-    public List<Event> getEventsByCreator(Customer creator) {
+    public List<Event> getEventsByCreator(User creator) {
         return eventRepo.getEventsByCreator(creator);
     }
 

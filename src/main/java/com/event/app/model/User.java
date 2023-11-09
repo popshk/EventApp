@@ -3,6 +3,7 @@ package com.event.app.model;
 import com.event.app.config.security.Role;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,20 +16,26 @@ import java.util.Set;
 @Document
 @Data
 @Builder
-public class Customer implements UserDetails {
+public class User implements UserDetails {
 
     @MongoId
     private String id;
 
     private String username;
+    private String email;
     private String firstName;
     private String lastName;
-    private List<Event> eventCreated;
-    private List<Event> eventJoined;
-    private List<Customer> friendList;
     private String password;
     private Set<Role> roles;
 
+    @DBRef
+    private List<Event> eventCreated;
+
+    @DBRef
+    private List<Event> eventJoined;
+
+    @DBRef
+    private List<User> friendList;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
