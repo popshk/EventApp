@@ -3,4 +3,5 @@
 <#list events as event>
     <p>${event}</p>
 </#list>
+<#include "parts/navigation.ftlh">
 </@common.page>

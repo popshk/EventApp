@@ -14,30 +14,14 @@
     </head>
     <body>
     <main class="content">
-        <div class="container">
+        <div class="d-flex justify-content-center">
             <div>
                 <#nested>
             </div>
         </div>
     </main>
-    <div class="fixed-bottom bg-light">
-    <div class="mx-auto mt-1">
-        <div class="d-flex justify-content-center">
 
 
-                    <button type="button" class="btn btn-outline-success" style="width: 200px; height: 50px;">History of Events</button>
-
-
-
-                    <button type="button" class="btn btn-success " style="width: 300px; height: 50px;">Create event</button>
-
-
-
-                    <button type="button" class="btn btn-outline-success"style="width: 200px; height: 50px;">Friends</button>
-
-        </div>
-        </div>
-   </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
