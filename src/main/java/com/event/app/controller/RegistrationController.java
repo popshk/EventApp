@@ -3,6 +3,7 @@ package com.event.app.controller;
 import com.event.app.model.User;
 import com.event.app.service.UserService;
 import jakarta.validation.Valid;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
+@Controller
 public class RegistrationController {
 
     private final UserService userService;
