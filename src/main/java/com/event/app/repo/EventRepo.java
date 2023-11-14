@@ -11,4 +11,8 @@ import java.util.List;
 public interface EventRepo extends MongoRepository<Event, String> {
 
     List<Event> getEventsByCreator(User creator);
+
+    List<Event> getEventsByMembersContains(User member);
+
+    Event findEventById(String id);
 }
