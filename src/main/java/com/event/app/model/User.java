@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Document
 @Data
@@ -29,10 +31,10 @@ public class User implements UserDetails {
     private Set<Role> roles;
 
     @DBRef
-    private List<Event> eventCreated;
+    private List<Event> eventsCreated;
 
     @DBRef
-    private List<Event> eventJoined;
+    private List<Event> eventsJoined;
 
     @DBRef
     private List<User> friendList;
@@ -64,5 +66,12 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public List<Event> getCombinedEvents() {
+        Stream<Event> eventCreatedStream = eventsCreated != null ? eventsCreated.stream() : Stream.empty();
+        Stream<Event> eventJoinedStream = eventsJoined != null ? eventsJoined.stream() : Stream.empty();
+        return Stream.concat(eventCreatedStream, eventJoinedStream)
+                .collect(Collectors.toList());
     }
 }

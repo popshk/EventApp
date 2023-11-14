@@ -4,6 +4,7 @@ import com.event.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -31,29 +32,31 @@ public class SecurityConf {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests()
-                    .requestMatchers("/","/registration").permitAll()
-                    .anyRequest()
-                    .authenticated()
-                    .and()
-                    .formLogin().loginPage("/login")
-                    .defaultSuccessUrl("/", true)
-                    .permitAll()
-                    .and()
-                    .rememberMe()
-                    .and()
-                    .logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/")
-                    .invalidateHttpSession(true)
-                    .clearAuthentication(true)
-                    .deleteCookies("JSESSIONID")
-                    .permitAll();
+                .requestMatchers("/", "/registration", "static/**", "/css/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/registration").permitAll()
+                .requestMatchers(HttpMethod.POST, "/registration").permitAll()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .formLogin().loginPage("/login")
+                .defaultSuccessUrl("/", true)
+                .permitAll()
+                .and()
+                .rememberMe()
+                .and()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .deleteCookies("JSESSIONID")
+                .permitAll();
 
         httpSecurity
-                    .csrf()
-                    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                    .and()
-                    .cors();
+                .csrf()
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .and()
+                .cors();
 
         return httpSecurity.build();
     }

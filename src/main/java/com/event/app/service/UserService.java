@@ -1,6 +1,7 @@
 package com.event.app.service;
 
 import com.event.app.config.security.Role;
+import com.event.app.model.Event;
 import com.event.app.model.User;
 import com.event.app.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +39,8 @@ public class UserService implements UserDetailsService {
 
     public void createUser(final User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRoles(Collections.singleton(Role.USER));
-        userRepo.insert(user);
+//        user.setRoles(Collections.singleton(Role.USER));
+        userRepo.save(user);
     }
 
     public User getUserById(String userId) {
