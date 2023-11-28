@@ -1,7 +1,5 @@
 package com.event.app.service;
 
-import com.event.app.config.security.Role;
-import com.event.app.model.Event;
 import com.event.app.model.User;
 import com.event.app.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -47,8 +44,16 @@ public class UserService implements UserDetailsService {
         return userRepo.findById(userId).orElseThrow(usernameNotFoundExceptionSupplier(userId));
     }
 
-    public void deleteUser(String userId) {
+    public void deleteUserById(String userId) {
         userRepo.deleteById(userId);
+    }
+
+    public void updateUserProfile(User user, String username, String email, String firstName, String lastName) {
+        user.setUsername(username);
+        user.setEmail(email);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        userRepo.save(user);
     }
 
     public List<User> getAllUsers() {
@@ -74,5 +79,16 @@ public class UserService implements UserDetailsService {
 
     public Optional<User> getUserByEmail(String email) {
         return userRepo.findUserByEmail(email);
+    }
+
+    public void changePassword(String oldPassword, String newPassword, String confirmPassword, User user) {
+        if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+            throw new IllegalStateException("Wrong password");
+        }
+        if (!newPassword.equals(confirmPassword)) {
+            throw new IllegalStateException("Password are not the same");
+        }
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepo.save(user);
     }
 }

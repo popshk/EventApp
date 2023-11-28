@@ -4,7 +4,6 @@ import com.event.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -33,8 +32,6 @@ public class SecurityConf {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests()
                 .requestMatchers("/", "/registration", "static/**", "/css/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/registration").permitAll()
-                .requestMatchers(HttpMethod.POST, "/registration").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

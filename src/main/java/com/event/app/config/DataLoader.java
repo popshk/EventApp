@@ -35,7 +35,7 @@ public class DataLoader {
     @PostConstruct
     private void init() {
         User user1 = User.builder().username("Mira").password("123").roles(Collections.singleton(Role.ADMIN)).build();
-        User user2 = User.builder().username("Dima").password("123").roles(Collections.singleton(Role.ADMIN)).build();
+        User user2 = User.builder().username("admin").password("admin").roles(Collections.singleton(Role.ADMIN)).build();
         userService.createUser(user1);
         userService.createUser(user2);
         Event event1 = Event.builder().name("Mira's birthday").creator(user1).eventDate(LocalDate.of(2023,11,25)).build();
